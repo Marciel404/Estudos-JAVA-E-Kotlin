@@ -1,7 +1,5 @@
 package com.github.marciel404.bot.utils;
 
-import com.github.marciel404.bot.events.Message;
-import com.github.marciel404.bot.events.Ready;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
@@ -14,8 +12,11 @@ import static com.github.marciel404.bot.utils.Configs.token;
 public interface loader {
     JDA client = JDABuilder.createDefault(token)
             .addEventListeners(
-                    new Ready(),
-                    new Message())
+                    new com.github.marciel404.bot.events.Ready(),
+                    new com.github.marciel404.bot.events.Message(),
+                    new com.github.marciel404.bot.events.Member(),
+                    new com.github.marciel404.bot.commands.Actions(),
+                    new com.github.marciel404.bot.eventbuttons.ActionsButtons())
             .enableIntents(
                     GatewayIntent.GUILD_MEMBERS,
                     GatewayIntent.DIRECT_MESSAGES,

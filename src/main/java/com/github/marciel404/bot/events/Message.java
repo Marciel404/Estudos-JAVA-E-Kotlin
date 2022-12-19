@@ -1,6 +1,5 @@
 package com.github.marciel404.bot.events;
 
-
 import com.github.marciel404.bot.db.Moderation;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
@@ -8,11 +7,10 @@ import net.dv8tion.jda.api.events.GenericEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.EventListener;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
-
 import static com.github.marciel404.bot.utils.Configs.channels;
+
 public class Message implements EventListener {
 
     @Override
@@ -20,7 +18,7 @@ public class Message implements EventListener {
 
         if (e instanceof MessageReceivedEvent) {
             if (((MessageReceivedEvent) e).isFromGuild()) {
-                if (((MessageReceivedEvent) e).getMessage().getContentDisplay().equalsIgnoreCase("bane")) {
+                if (((MessageReceivedEvent) e).getMessage().getContentDisplay().toLowerCase().contains("bane")) {
                     if (Objects.requireNonNull(((MessageReceivedEvent) e).getMember()).hasPermission(Permission.BAN_MEMBERS)){
                         var y = ((MessageReceivedEvent) e).getMessage().getMentions().getMentions().toArray().length;
                         for (int x = 0; y > x; x++) {
@@ -30,15 +28,13 @@ public class Message implements EventListener {
                             } catch (Exception error){
                                 ((MessageReceivedEvent) e).getChannel().sendMessage("Error: " + error).queue();
                             }
-
                         }
-
                     } else {
                         var y = ((MessageReceivedEvent) e).getMessage().getMentions().getMentions().toArray().length;
                         for (int x = 0; y > x; x++) {
                             Member member = ((MessageReceivedEvent) e).getMessage().getMentions().getMembers().get(x);
                             Moderation.addMember(member, 1);
-                            if (Moderation.verify(member) >= 3) {
+                            if (Moderation.verify(member.getId()) >= 3) {
                                 try {
                                     var channel = e.getJDA().getTextChannelById(channels[0]);
                                     if (channel != null) {
@@ -50,7 +46,7 @@ public class Message implements EventListener {
                             }
                         }
                     }
-                } else if (((MessageReceivedEvent) e).getMessage().getContentDisplay().equalsIgnoreCase("expulsa")){
+                } else if (((MessageReceivedEvent) e).getMessage().getContentDisplay().toLowerCase().contains("expulsa")){
                     if (Objects.requireNonNull(((MessageReceivedEvent) e).getMember()).hasPermission(Permission.KICK_MEMBERS)){
                         var y = ((MessageReceivedEvent) e).getMessage().getMentions().getMentions().toArray().length;
                         for (int x = 0; y > x; x++) {
@@ -60,15 +56,13 @@ public class Message implements EventListener {
                             } catch (Exception error){
                                 ((MessageReceivedEvent) e).getChannel().sendMessage("Error: " + error).queue();
                             }
-
                         }
-
                     } else {
                         var y = ((MessageReceivedEvent) e).getMessage().getMentions().getMentions().toArray().length;
                         for (int x = 0; y > x; x++) {
                             Member member = ((MessageReceivedEvent) e).getMessage().getMentions().getMembers().get(x);
                             Moderation.addMember(member, 1);
-                            if (Moderation.verify(member) >= 3) {
+                            if (Moderation.verify(member.getId()) >= 3) {
                                 try {
                                     var channel = e.getJDA().getTextChannelById(channels[0]);
                                     if (channel != null) {
