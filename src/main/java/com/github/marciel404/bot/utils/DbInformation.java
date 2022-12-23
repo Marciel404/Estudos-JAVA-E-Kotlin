@@ -6,7 +6,6 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
-
 import static com.github.marciel404.bot.utils.Configs.database;
 import static com.github.marciel404.bot.utils.Configs.mongokey;
 

@@ -1,12 +1,10 @@
 package com.github.marciel404.bot.commands;
 
-
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
-
 import static com.github.marciel404.bot.embeds.ActionsEmbed.hugembed;
 import static com.github.marciel404.bot.embeds.ActionsEmbed.kissembed;
 
@@ -18,27 +16,29 @@ public class Actions extends ListenerAdapter {
         if (event.isFromGuild()){
 
             var member = Objects.requireNonNull(event.getOption("member")).getAsMember();
-            assert member != null;
+            var userCommand = Objects.requireNonNull(event.getMember());
+            var selfBotUser = event.getJDA().getSelfUser();
+            if (member == null) {event.reply("Não encontrei esse membro no servidor").queue(); return;}
 
             switch (event.getName()) {
 
                 case "kiss" -> {
                     Button button = Button.primary("kiss-"+member.getId(),"Retribuir");
-                    if (Objects.equals(Objects.requireNonNull(event.getOption("member")).getAsUser(), event.getJDA().getSelfUser())){
+                    if (member.getId().equals(selfBotUser.getId())){
 
                         event.reply(
                                 "Acho melhor sermos só amigos"
                         ).setEmbeds(
                                 hugembed(
                                         event.getJDA().getSelfUser().getAsMention(),
-                                        event.getMember().getAsMention())
+                                        userCommand.getAsMention())
                         ).queue();
 
-                    } else if (Objects.equals(Objects.requireNonNull(event.getOption("member")).getAsUser(), event.getUser())){
+                    } else if (member.getId().equals(event.getUser().getId())){
 
                         event.replyEmbeds(
                                 kissembed(
-                                        event.getMember().getAsMention(),
+                                        userCommand.getAsMention(),
                                         "a si mesmo????"
                                 )
                         ).queue();
@@ -48,11 +48,8 @@ public class Actions extends ListenerAdapter {
                         event.replyEmbeds(
                                 kissembed(
                                         Objects.requireNonNull(event.getMember()).getAsMention(),
-                                        member.getAsMention()
-                                )
-                        )
-                        .addActionRow(button)
-                            .queue();
+                                        member.getAsMention())
+                        ).addActionRow(button).queue();
                     }
                 }
 
@@ -60,18 +57,20 @@ public class Actions extends ListenerAdapter {
                     Button button = Button.primary("hug-"+member.getId(),"Retribuir");
                     if (member.equals(event.getMember())){
                         event.reply(
-                                "Você está tão solitario assim?\nAqui, deixa eu te abraçar")
+                                        "Você está tão solitario assim?\nAqui, deixa eu te abraçar")
                                 .setEmbeds(hugembed(
-                                                event.getJDA().getSelfUser().getAsMention(),
-                                                event.getMember().getAsMention())
+                                        event.getJDA().getSelfUser().getAsMention(),
+                                        userCommand.getAsMention())
                                 )
                                 .setActionRow(button)
                                 .queue();
-                        return;
+                    }else {
+                        event.replyEmbeds(
+                                        hugembed(userCommand.getAsMention(), member.getAsMention()))
+                                .setActionRow(button)
+                                .queue();
                     }
-                    event.reply("Abraço").queue();
                 }
-
             }
         }
     }

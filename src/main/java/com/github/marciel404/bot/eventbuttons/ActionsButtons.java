@@ -13,8 +13,10 @@ public class ActionsButtons extends ListenerAdapter {
     public void onButtonInteraction(@NotNull ButtonInteractionEvent event) {
 
         if (event.isFromGuild()){
+
             var mention = event.getMessage().getEmbeds().get(0).getDescription();
             assert mention != null;
+
             if ( event.getComponentId().equals("kiss-"+event.getUser().getId())){
                 event.replyEmbeds(
                         kissembed(
@@ -43,7 +45,8 @@ public class ActionsButtons extends ListenerAdapter {
                         )
                 ).queue();
                 event.editButton(event.getButton().asDisabled()).queue();
-            }else {
+
+            } else {
                 event.reply("Esse botão não te pertence, ele pertence a <@"
                                 + event.getComponentId()
                                 .replace("kiss-", "")+">")
