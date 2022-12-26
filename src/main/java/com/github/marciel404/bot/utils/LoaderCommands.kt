@@ -7,7 +7,7 @@ fun loadCommands() {
         .setGuildOnly(true)
         .addOption(OptionType.USER, "member", "Mencione o membro", true)
         .queue()
-    client.upsertCommand("Hug","Abraça um Membro")
+    client.upsertCommand("hug","Abraça um Membro")
         .setGuildOnly(true)
         .addOption(OptionType.USER, "member", "Mencione o membro", true)
         .queue()

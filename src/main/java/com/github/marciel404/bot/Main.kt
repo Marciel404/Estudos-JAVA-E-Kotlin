@@ -7,7 +7,7 @@ import org.slf4j.simple.SimpleLogger
 object Main {
     @JvmStatic
     fun main(args: Array<String>) {
-        System.setProperty(SimpleLogger.LOG_FILE_KEY, "null")
+        System.setProperty(SimpleLogger.LOG_FILE_KEY, "logs")
         try {
             client
             loadCommands()

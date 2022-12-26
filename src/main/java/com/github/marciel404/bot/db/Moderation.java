@@ -28,7 +28,6 @@ public class Moderation {
 
             invites.updateOne(query,update,upsert);
 
-            System.out.println("Tudo Certo");
         } catch (MongoException error){
             System.out.println("Error: "+error);
         }

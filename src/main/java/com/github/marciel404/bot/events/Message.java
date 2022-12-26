@@ -9,16 +9,16 @@ public class Message extends ListenerAdapter {
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent message){
 
-        if (message.isFromGuild()){
-            if (message.getAuthor().isBot()) return;
-            switch (message.getMessage().getContentDisplay().toLowerCase()){
+        if (!message.isFromGuild())return;
 
-                case "macaco", "seu preto" -> {
-                    message.getMessage().delete().queue();
-                    message.getMessage().getChannel().sendMessage("Que isso menino calme").queue();
-                }
+        if (message.getAuthor().isBot()) return;
+        switch (message.getMessage().getContentDisplay().toLowerCase()){
 
+            case "macaco", "seu preto" -> {
+                message.getMessage().delete().queue();
+                message.getMessage().getChannel().sendMessage("Que isso menino calme").queue();
             }
+
         }
     }
 }
