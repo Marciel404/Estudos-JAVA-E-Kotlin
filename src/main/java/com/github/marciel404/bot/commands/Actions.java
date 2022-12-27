@@ -22,51 +22,43 @@ public class Actions extends ListenerAdapter {
         switch (event.getName()) {
 
             case "kiss" -> {
-                Button button = Button.primary("kiss-"+member.getId(),"Retribuir");
-                if (member.getId().equals(selfBotUser.getId())){
-
-                    event.reply(
-                            "Acho melhor sermos só amigos"
-                    ).setEmbeds(
-                            hugEmbed(
-                                    selfBotUser.getAsMention(),
-                                    userCommand.getAsMention())
-                    ).queue();
-
-                }
-                else {
-
-                    event.replyEmbeds(
-                            kissEmbed(
-                                    userCommand.getAsMention(),
-                                    member.getAsMention())
-                    ).addActionRow(button).queue();
-
-                }
+                Button button;
+                if (!member.getId().equals(userCommand.getId())) button = Button.primary("kiss-"+member.getId(),"Retribuir");
+                else button = Button.primary("kiss-"+member.getId(),"Retribuir").asDisabled();
+                event.replyEmbeds(
+                        kissEmbed(
+                                userCommand.getAsMention(),
+                                member.getAsMention(),
+                                selfBotUser.getAsMention()
+                        )
+                ).addActionRow(button).queue();
             }
 
             case "hug" -> {
-                Button button = Button.primary("hug-"+member.getId(),"Retribuir");
-                if (member.equals(event.getMember())){
-                    event.reply(
-                            "Você está tão solitario assim?\nAqui, deixa eu te abraçar")
-                            .setEmbeds(hugEmbed(
+                Button button;
+                if (!member.getId().equals(userCommand.getId())) button = Button.primary("hug-"+member.getId(),"Retribuir");
+                else button = Button.primary("hug-"+member.getId(),"Retribuir").asDisabled();
+                event.replyEmbeds(hugEmbed(
                                     selfBotUser.getAsMention(),
-                                    userCommand.getAsMention())
-                            )
-                            .setActionRow(button)
-                            .queue();
-                }
-                else {
-                    event.replyEmbeds(
-                            hugEmbed(
                                     userCommand.getAsMention(),
-                                    member.getAsMention())
-                            )
-                            .setActionRow(button)
-                            .queue();
-                }
+                                    selfBotUser.getAsMention()
+                                )
+                ).setActionRow(button).queue();
             }
+
+            case "punch" -> {
+                Button button;
+                if (!member.getId().equals(userCommand.getId())) button = Button.primary("punch-"+member.getId(),"Retribuir");
+                else button = Button.primary("puch-"+member.getId(),"Retribuir").asDisabled();
+                event.replyEmbeds(
+                        punchEmbed(
+                                userCommand.getAsMention(),
+                                member.getAsMention(),
+                                selfBotUser.getAsMention()
+                        )
+                ).setActionRow(button).queue();
+            }
+
         }
     }
 }

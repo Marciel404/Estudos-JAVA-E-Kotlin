@@ -11,7 +11,6 @@ import org.json.JSONObject;
 import static com.github.marciel404.bot.utils.DbInformation.invites;
 import static com.mongodb.client.model.Filters.eq;
 
-
 public class Moderation {
 
     public static void addMember(Member memberId, Integer qnt){

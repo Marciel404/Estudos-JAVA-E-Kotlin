@@ -11,4 +11,8 @@ fun loadCommands() {
         .setGuildOnly(true)
         .addOption(OptionType.USER, "member", "Mencione o membro", true)
         .queue()
+    client.upsertCommand("punch","Soca um Membro")
+        .setGuildOnly(true)
+        .addOption(OptionType.USER, "member", "Mencione o membro", true)
+        .queue()
 }
