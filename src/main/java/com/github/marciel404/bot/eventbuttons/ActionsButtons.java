@@ -43,7 +43,7 @@ public class ActionsButtons extends ListenerAdapter {
             event.editButton(event.getButton().asDisabled()).queue();
         } else if (event.getComponentId().equals("punch-"+user.getId())) {
             event.replyEmbeds(
-                    hugEmbed(
+                    punchEmbed(
                             event.getUser().getAsMention(),
                             mention.replaceAll(
                                     "abraçou "+ user.getAsMention(),
@@ -53,10 +53,24 @@ public class ActionsButtons extends ListenerAdapter {
                     )
             ).queue();
             event.editButton(event.getButton().asDisabled()).queue();
+        } else if (event.getComponentId().equals("slap-"+user.getId())) {
+
+            event.replyEmbeds(
+                    slapEmbed(
+                            event.getUser().getAsMention(),
+                            mention.replaceAll(
+                                    "abraçou "+ user.getAsMention(),
+                                    ""
+                            ),
+                            selfBotUser.getAsMention()
+                    )
+            ).queue();
+
         } else {
-            event.reply(String.format("Esse botão não te pertence, ele pertence a <@%s>",
-                    event.getComponentId()
-                            .substring(
+            event.reply(
+                    String.format(
+                            "Esse botão não te pertence, ele pertence a <@%s>",
+                            event.getComponentId().substring(
                                     event.getComponentId()
                                             .lastIndexOf("-")+1
                             )
