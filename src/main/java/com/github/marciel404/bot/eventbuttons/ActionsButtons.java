@@ -29,7 +29,8 @@ public class ActionsButtons extends ListenerAdapter {
                     )
             ).queue();
             event.editButton(event.getButton().asDisabled()).queue();
-        } else if ( event.getComponentId().equals("hug-"+user.getId())){
+        }
+        else if ( event.getComponentId().equals("hug-"+user.getId())){
             event.replyEmbeds(
                     hugEmbed(
                             event.getUser().getAsMention(),
@@ -41,7 +42,8 @@ public class ActionsButtons extends ListenerAdapter {
                     )
             ).queue();
             event.editButton(event.getButton().asDisabled()).queue();
-        } else if (event.getComponentId().equals("punch-"+user.getId())) {
+        }
+        else if (event.getComponentId().equals("punch-"+user.getId())) {
             event.replyEmbeds(
                     punchEmbed(
                             event.getUser().getAsMention(),
@@ -53,7 +55,8 @@ public class ActionsButtons extends ListenerAdapter {
                     )
             ).queue();
             event.editButton(event.getButton().asDisabled()).queue();
-        } else if (event.getComponentId().equals("slap-"+user.getId())) {
+        }
+        else if (event.getComponentId().equals("slap-"+user.getId())) {
 
             event.replyEmbeds(
                     slapEmbed(
@@ -66,7 +69,8 @@ public class ActionsButtons extends ListenerAdapter {
                     )
             ).queue();
 
-        } else {
+        }
+        else {
             event.reply(
                     String.format(
                             "Esse botão não te pertence, ele pertence a <@%s>",
@@ -77,5 +81,7 @@ public class ActionsButtons extends ListenerAdapter {
                     )
             ).setEphemeral(true).queue();
         }
+
     }
+
 }

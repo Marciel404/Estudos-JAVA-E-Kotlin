@@ -17,11 +17,8 @@ public class RequestsActions {
 
         HttpClient client = HttpClient.newHttpClient();
 
-        HttpRequest request = HttpRequest.newBuilder()
-                .GET()
-                .timeout(Duration.ofSeconds(10))
-                .uri(URI.create("https://api.otakugifs.xyz/gif?reaction=kiss&format=gif"))
-                .build();
+        HttpRequest request = HttpRequest.newBuilder().GET().timeout(Duration.ofSeconds(10))
+                .uri(URI.create("https://api.otakugifs.xyz/gif?reaction=kiss&format=gif")).build();
 
         HttpResponse<String> response;
         try {
@@ -113,11 +110,8 @@ public class RequestsActions {
 
         HttpClient client = HttpClient.newHttpClient();
 
-        HttpRequest request = HttpRequest.newBuilder()
-                .GET()
-                .timeout(Duration.ofSeconds(10))
-                .uri(URI.create("https://api.otakugifs.xyz/gif?reaction=lick&format=gif"))
-                .build();
+        HttpRequest request = HttpRequest.newBuilder().GET().timeout(Duration.ofSeconds(10))
+                .uri(URI.create("https://api.otakugifs.xyz/gif?reaction=lick&format=gif")).build();
 
         HttpResponse<String> response;
         try {
@@ -137,12 +131,8 @@ public class RequestsActions {
 
         HttpClient client = HttpClient.newHttpClient();
 
-        HttpRequest request = HttpRequest.newBuilder()
-                .GET()
-                .timeout(Duration.ofSeconds(10))
-                .uri(URI.create("https://api.thecatapi.com/v1/images/search"))
-                .build();
-
+        HttpRequest request = HttpRequest.newBuilder().GET().timeout(Duration.ofSeconds(10))
+                .uri(URI.create("https://api.thecatapi.com/v1/images/search")).build();
         HttpResponse<String> response;
         try {
             response = client.send(request, HttpResponse.BodyHandlers.ofString());

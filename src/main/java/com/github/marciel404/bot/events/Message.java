@@ -10,8 +10,8 @@ public class Message extends ListenerAdapter {
     public void onMessageReceived(@NotNull MessageReceivedEvent message){
 
         if (!message.isFromGuild())return;
-
         if (message.getAuthor().isBot()) return;
+
         switch (message.getMessage().getContentDisplay().toLowerCase()){
 
             case "macaco", "seu preto" -> {

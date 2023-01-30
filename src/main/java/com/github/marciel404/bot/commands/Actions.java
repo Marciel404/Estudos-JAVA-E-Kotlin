@@ -98,28 +98,26 @@ public class Actions extends ListenerAdapter {
                 ).setActionRow(button).queue();
             }
 
-            /*case "cafune" -> {
-                var member = Objects.requireNonNull(event.getOption("member")).getAsMember();
-                if (member == null) {event.reply("Não encontrei esse membro no servidor").queue();return;}
-
-                if (!member.getId().equals(userCommand.getId())) button = Button.primary("lick-"+member.getId(),"Retribuir");
-                else button = Button.primary("lick-"+member.getId(),"Retribuir").asDisabled();
-
-                event.replyEmbeds(
-                        cafuneEmbed(
-                                userCommand.getAsMention(),
-                                member.getAsMention(),
-                                selfBotUser.getAsMention()
-                        )
-                ).setActionRow(button).queue();
-            }*/
+//            case "cafune" -> {
+//                var member = Objects.requireNonNull(event.getOption("member")).getAsMember();
+//                if (member == null) {event.reply("Não encontrei esse membro no servidor").queue();return;}
+//
+//                if (!member.getId().equals(userCommand.getId())) button = Button.primary("lick-"+member.getId(),"Retribuir");
+//                else button = Button.primary("lick-"+member.getId(),"Retribuir").asDisabled();
+//
+//                event.replyEmbeds(
+//                        cafuneEmbed(
+//                                userCommand.getAsMention(),
+//                                member.getAsMention(),
+//                                selfBotUser.getAsMention()
+//                        )
+//                ).setActionRow(button).queue();
+//            }
 
             case "flip-coin" -> {
+                int y = 1;
 
-                int y;
-
-                if (event.getOption("qnt") == null) y = 1;
-                else y = event.getOption("qnt").getAsInt();
+                if (event.getOption("qnt") != null) y = event.getOption("qnt").getAsInt();
 
                 event.deferReply(true).queue();
 
@@ -140,12 +138,7 @@ public class Actions extends ListenerAdapter {
                 }
             }
 
-            case "cat" -> {
-
-                event.replyEmbeds(
-                        catEmbed()
-                ).queue();
-            }
+            case "cat" -> event.replyEmbeds(catEmbed()).queue();
         }
     }
 }

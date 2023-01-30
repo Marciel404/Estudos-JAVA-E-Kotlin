@@ -10,7 +10,7 @@ import net.dv8tion.jda.api.utils.cache.CacheFlag
 
 object Client{
 
-    val client = JDABuilder.createDefault(Configs.token)
+    val client = JDABuilder.createLight(Configs.token)
         .addEventListeners(
             com.github.marciel404.bot.events.Ready(),
             com.github.marciel404.bot.events.Message(),

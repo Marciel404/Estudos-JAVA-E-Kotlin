@@ -27,7 +27,8 @@ public class Moderation {
 
             invites.updateOne(query,update,upsert);
 
-        } catch (MongoException error){
+        }
+        catch (MongoException error){
             System.out.println("Error: "+error);
         }
     }
